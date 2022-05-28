@@ -1,14 +1,15 @@
 from prime_number_fact import criba, number, euclides, euclidex, euclidex1
+import time
 
-first_number = 18
-second_number = 12
-print("El máximo común divisor entre 18 y 12",euclidex(first_number,second_number))
-print("El máximo común divisor entre 18 y 12",euclidex1(first_number,second_number))
+first_number = 15518
+second_number = 11876
 
-#n=100
-#p = criba(n)  # p lo usa facp
-#print("Criba de {n} \n", criba(n),"\n")
-
-#print("Encontrar coordenadas primas", facp(n),"\n")
-
-#print(number(criba(n)),"\n")
+def timer(function,first_number,second_number):
+    init_time = time.time_ns()
+    function(first_number,second_number)
+    final_time = time.time_ns()
+    total_time = final_time-init_time
+    return total_time
+    
+print(timer(euclidex,first_number,second_number))
+print(timer(euclidex1,first_number,second_number))
