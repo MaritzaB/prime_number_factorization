@@ -28,7 +28,7 @@ clean:
 
 format:
 	black --line-length 100 src/*.py
-	black --line-length 100 poo_with_python/*.py
+
 
 tests:
 	pytest --verbose tests/
