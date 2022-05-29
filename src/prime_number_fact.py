@@ -15,8 +15,17 @@ def calculatePrimeFactors(n):
         primfac.append(n)
     return primfac
 
+def executeProcess():
+  for i in range(1000):
+    rand = random.randint(20000, 100000000)
+    print(calculatePrimeFactors(rand))
 
 def main():
-    print("Starting number crunching")
-    t0 = time.time()
+    threads = []
+    for i in range(10):
+        thread = threading.Thread(target=executeProcess)
+        threads.append(thread)
+        thread.start()
+    for thread in threads:
+        thread.join()
 
