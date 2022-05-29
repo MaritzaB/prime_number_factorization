@@ -21,10 +21,6 @@ def euclidex1(a, b):
         B = Bx
     return A, B, b
 
-
-# print("El máximo común divisor entre 18 y 12",euclidex1(18,12))
-
-
 def euclidex(a, b):
     # Calcula de forma recursiva
     if a % b == 0:
@@ -33,29 +29,19 @@ def euclidex(a, b):
         A, B, r = euclidex(b, a % b)
         return B, A - (a // b) * B, r
 
-
-# print("El máximo común divisor entre 18 y 12",euclidex(18,12))
-
-
 def euclides(a, b):
     if a % b == 0:
         return b
     else:
         return euclides(b, a % b)
 
-
-# Def phi de euler
-
-
 def phi(n):
+    # Cantidad de números primos menores que n son primos
     m = 0
     for k in range(1, n):
         if euclides(n, k) == 1:
             m = m + 1
     return m
-
-
-# print(phi(18))
 
 
 def chino(m, r):
@@ -122,7 +108,7 @@ def number(e):
     return m
 
 
-n = 100
+n = 36
 p = criba(n)  # p lo usa facp
 # print("Criba de {n} \n", criba(n),"\n")
 
