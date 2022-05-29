@@ -3,12 +3,13 @@ from N17_euclidex1 import euclidex1, euclidex
 import time
 from random import getrandbits, seed
 import numpy as np
+import math
 
 
 def listOfRandbits():
-    seed(5)
+    seed(68)
     randbits_list = []
-    for i in [3, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55]:
+    for i in [3, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 63]:
         randbits_list.append(getrandbits(i))
     return randbits_list
 
@@ -22,11 +23,11 @@ def timer(function, number):
 
 
 rand_num_list = listOfRandbits()
-# timer_list = []
+timer_list = []
 
 for i in range(len(rand_num_list)):
-    print(f"Número aleatorio: ", rand_num_list[i])
-    # timer_list.append(timer(calculatePrimeFactors,rand_num_list[i]))
+    print(f"Número aleatorio: ", rand_num_list[i], "Bits: ", math.floor(math.log(rand_num_list[i])))
+    timer_list.append(timer(calculatePrimeFactors,rand_num_list[i]))
     print(f"Tiempo de cálculo: ", timer(calculatePrimeFactors, rand_num_list[i]))
 
 
