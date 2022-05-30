@@ -98,58 +98,43 @@ Los algoritmos de categoría 1 o propósito específico son aquellos cuyo tiempo
 ejecución depende del tamaño del factor primo más pequeño. Por ejemplo:
 
 \begin{itemize}
-\item División por tentativa
-\item Algorítmo Rho de Pollar
-\item Método de factorización de Fermat
+    \item División por tentativa
+    \item Algoritmo Rho de Pollar
+    \item Método de factorización de Fermat
 \end{itemize}
 
 Los algoritmos de categoría 2 o propósito general son aquellos cuyo tiempo de
 ejecución depende solamente del tamaño del entero a ser factorizado Por ejemplo:
 
 \begin{itemize}
-\item Algoritmo de Dixon
-\item Factorización con fracciones contínuas
-\item Criba cuadrática
-\item Criba racional
+    \item Algoritmo de Dixon
+    \item Factorización con fracciones contínuas
+    \item Criba cuadrática
+    \item Criba racional
 \end{itemize}
 
 \subsection{Dificultad y complejidad}
 
-La forma más obvia de encontrar los factores principales de un número es
-intentar dividir el número por todos los números entre 2 y 1 menos que el
-número. Cuando un posible factor divide el número de manera uniforme, guarde el
-factor, divida el número y continúe intentando más factores posibles. Tenga en
-cuenta que debe intentar el mismo factor nuevamente antes de continuar en caso
-de que el número contenga más de una copia del factor
-\cite{stephens2019essential}.
 
-Por ejemplo, para encontrar los factores primos de 127, intentaría dividir 127
-por 2, 3, 4, 5, y así sucesivamente, hasta llegar a 126.
+La forma más básica de factorizar un número, $N$, es intentar dividirlo por
+todos los números inferiores a este hasta que encontremos un factor que divide
+$N$. Luego intentamos dividir $N$ con el siguiente número y pronto terminaremos
+con una lista de factores de $N$.
 
-Entonces, ¿cómo pasamos de un número a su factorización, es decir, su
-descomposición como producto de números primos? La forma más básica de
-factorizar un número, n, es intentar dividirlo por todos los números inferiores
-a este hasta que encuentre un número, x, que divide N. luego intente dividir n
-con el siguiente número, x + 1 y pronto. Terminarás con una lista de factores de
-N. ¿Cuál es la complejidad del tiempo de esto? Primero, recuerde que expresamos
+Para saber la complejidad de este algoritmo, recordemos que expresamos
 complejidades en función de la longitud de la entrada. La longitud de bits del
-número n es n = log2 N. Por la definición básica de logaritmo, esto significa
-que n = 2n. Debido a que todos los números inferiores a N/2 son suposiciones
-razonables para posibles factores de N, hay aproximadamente N/2 = 2n/2 valores
-para probar. La complejidad de nuestro algoritmo de factorización ingenuo es,
-por lo tanto, $$ O(2n)$$, ignorando el coeficiente 1/2 en la notación $$ O(2^n)$$.
+número $N$ es $n= log2 N$. Por la definición básica de logaritmo, esto
+significa que $N = 2^n$. Debido a que todos los números inferiores a $N/2$ son
+suposiciones razonables para posibles factores de $N$, hay aproximadamente $$N/2
+= 2^n/2$$ valores para probar. La complejidad de nuestro algoritmo de
+factorización tentativo es, por lo tanto, $$ O(2n) $$ ignorando el coeficiente
+1/2 en la notación $ O(2^n)$. \\
 
 Por supuesto, muchos números son fáciles de tener en cuenta al encontrar primero
 factores pequeños (2, 3, 5, etc.) y luego factorizando iterativamente cualquier
-otro factor no de antaño. Pero aquí estamos interesados en el número de la
-forma n = P x Q, donde P y Q son grandes, como se encuentran en la criptografía.
-
-
-
-\section{Solución}
-% ¿Cómo se piensa resolver este problema?
-
-%¿Cómo analiza el rendimiento del tiempo de ejecución de este algoritmo? 
+otro factor no primo. Pero aquí estamos interesados en el número de la forma $n
+= p x q$, donde $p$ y $q$ son valores muy grandes, como se encuentran en la
+criptografía.
 
 Para la mayoría de los algoritmos, considera el tiempo de ejecución como una
 función de la cantidad de entradas. Sin embargo, este algoritmo solo tiene una
@@ -159,42 +144,101 @@ tarda el algoritmo en función del valor 1.
 
 Para algoritmos como este, el tiempo depende del tamaño de la entrada y no en el
 número de entradas. Así es como los analiza: observando el tamaño de la entrada.
-Puede pensar en esto como mirar la cantidad de bits en el valor que va a
-factorizar. Ignora cualquier bit de orden superior que sea cero. 
+Podemos pensar en esto como mirar la cantidad de bits en el valor que va a
+factorizar.
 
-Por ejemplo, el valor 1, almacenado en un entero de 64 bits, aún ocupa 64 bits
-en la computadora. Pero en realidad solo estamos interesados en ese único bit
-que realmente usa el valor 1. Se necesitan bits de log(n) para representar el número
-n en binario. Aquí estoy usando n minúscula para recordar que estamos hablando
-del valor de la entrada y no del número de entradas. Si dejamos que N mayúscula
-sea el número de bits, entonces tenemos esta ecuación: la base logarítmica 2 de
-n pequeña es igual a N mayúscula. Si reorganizamos eso un poco, puede obtener
-esto: para n pequeña en términos de N mayúscula. Ahora, ¿qué podemos decir sobre
-el tiempo de ejecución del algoritmo de factorización? 
+El peor caso para este algoritmo ocurre cuando el número de entrada es primo. En
+ese caso, el programa examina posibles factores impares hasta llegar a la raíz
+cuadrada del número. Esto significa que si el número de pasos que realiza para
+llegar a ese punto es $ O(2^n)$, el tiempo de ejecución del algoritmo es
+exponencial en el número de bits de entrada.
 
-El peor caso para este algoritmo ocurre cuando el número de
-entrada es primo. En ese caso, el programa examina posibles factores impares
-hasta llegar a la raíz cuadrada del número. El número de pasos que realiza para
-llegar a ese punto es la raíz cuadrada del número. Eso significa que el tiempo
-de ejecución del algoritmo es la raíz cuadrada del orden de n minúscula. Para
-convertir eso en una función que involucre el número de bits, N mayúscula,
-reemplazamos la n minúscula con esta ecuación que encontramos anteriormente. El
-resultado es que el tiempo de ejecución del algoritmo es raíz cuadrada del orden
-de 2 elevado a n. Podemos simplificar eso un poco, porque la raíz cuadrada de 2
-elevado a n es lo mismo que la raíz cuadrada de 2 elevado a n. 
+Su tiempo de ejecución depende de potencias de $\sqrt(n)$, por lo que no crece
+tan rápido como lo haría si dependiera de potencias de 2 o algún número mayor.
+Pero una vez que la función crece, realmente despega, como lo hacen todas las
+funciones exponenciales. Es por eso que este algoritmo funciona para números
+moderadamente grandes pero no es práctico para números muy grandes de 100
+dígitos. Puede usar técnicas similares de usar bits de entrada para analizar
+otros algoritmos que tienen un número fijo de entradas
+\cite{stephens2015learning}.
 
-Esto significa que el tiempo de ejecución del algoritmo es exponencial en el
-número de bits de entrada. Su tiempo de ejecución depende de potencias de la
-raíz cuadrada de 2, por lo que no crece tan rápido como lo haría si dependiera
-de potencias de 2 o algún número mayor. Pero una vez que la función crece,
-realmente despega, como lo hacen todas las funciones exponenciales. Es por eso
-que este algoritmo funciona para números moderadamente grandes pero no es
-práctico para números muy grandes de 100 dígitos. Puede usar técnicas similares
-de usar bits de entrada para analizar otros algoritmos que tienen un número fijo
-de entradas \cite{stephens2015learning}.
+
+\section{Solución}
+% ¿Cómo se piensa resolver este problema?
+
+\subsection{Algoritmos implementados}
+
+Para este reporte implementé dos de los algorítmos mencionados en la sección
+anterior:
+
+\begin{itemize}
+\item Factorización secuencial de números primos (ver
+\texttt{sequentialPrimeFactorization()} de la sección \ref{sec:algoritmos})
+    \item División por tentativa (ver
+    \texttt{trialDivision()} de la sección \ref{sec:algoritmos})
+\end{itemize}
+
+\subsubsection{Algoritmo de factorización secuencial}
+
+Este algoritmo consiste en dividir el número entre todos los números entre 2 y
+n-1 menores a él. Cáda vez que un posible factor divide al número de manera
+uniforme, se guarda el factor y se divide el número. Esto continua hasta
+intentar la mayor cantidad de factores posibles \cite{stephens2019essential}.\\
+
+Por ejemplo para encontrar los factores primos de 204, intentaría dividir 204
+por 2, 3, 4, 5, y así sucesivamente, hasta llegar a 126. En este caso nos
+detendríamos en el factor 3, como en este ejemplo:
+
+\begin{center}
+    \begin{tabular}{ c c c }
+     Factores & Número \\ 
+              & 204    \\
+     2x2      & 102    \\
+     2x2x3    & 51
+    \end{tabular}
+    \end{center}
+
+\subsubsection{Algoritmo de división por tentativa}
+
+Para mejorar el algoritmo de factorización secuencial, podemos hacer las
+siguientes observaciones:
+
+\begin{itemize}
+    \item No necesitamos probar si el número es divisible por cualquier número par que
+    no sea 2 porque, si es divisible por cualquier número par, también es divisible
+    por 2. Esto significa que solo necesitamos comprobar la divisibilidad por 2 y luego
+    por números impares en lugar de por todos los factores posibles. Si lo hacemos,
+    reducimos el tiempo de ejecución aproximadamente a la mitad.
+
+    \item Solo necesita verificar los factores hasta la raíz cuadrada del número. Si
+    $ n= p*q $, entonces \textit{p}  o \textit{q} deben ser menores o iguales
+    que las $\sqrt(n)$. (Si \textit{p}  y \textit{q} son mayores que $\sqrt(n)$,
+    entonces su producto es mayor que \textit{n}). Si marcamos los factores posibles
+    hasta $\sqrt(n)$, encontraremos el factor más pequeño, y cuando dividamos
+    \textit{n} por ese factor, encontraremos el otro. Esto reduce el tiempo de
+    ejecución de $O(\sqrt(n))$.
+
+    \item Cada vez que dividimos el número por un factor, podemos actualizar el
+    límite superior de los posibles factores que necesitamos verificar, lo que nos
+    lleva a un algoritmo mejorado de la factorización secuencial (ver
+    \texttt{trialDivision()} de la sección \ref{sec:algoritmos}).
+
+\end{itemize}
+
+\subsection{Complejidad práctica del problema}
+
+Con el fin de realizar el análisis de complejidad práctica, implementé la
+función \texttt{timer()} y \texttt{timeScorer()} (ver en \ref{sec:complejidad}).
+
+La función llamada \texttt{randBits()} (ver sección \ref{sec:complejidad}) la
+implementé con el fin de obtener una lísta de números aleatorios generados con
+base en los bits que utiliza en número. Es decir, con esta función generamos una
+lista de \textit{n} elementos, cuyo elemento más pequeño es de una cifra y los
+siguientes van aumentando hasta llegar a la cantidad deseada de cifras.
+
 
 \section{Resultados y conclusiones}
- 
+
 
 
 \bibliography{../references/references.bib} 
@@ -203,13 +247,13 @@ de entradas \cite{stephens2015learning}.
 \pagebreak
 \section{Apéndice}
 
-\subsection{Algoritmos de factorización implementados}
+\subsection{Algoritmos de factorización implementados} \label{sec:algoritmos}
 
 \lstinputlisting[language=Python]{../src/prime_number_fact.py}
 
 \pagebreak
 
-\section{Implementación del código de análisis de complejidad práctica}
+\section{Implementación del código de análisis de complejidad práctica} \label{sec:complejidad}
 
 \lstinputlisting[language=Python]{../src/analizer.py}
 
