@@ -8,6 +8,30 @@
 \usepackage{hyperref}
 \usepackage[spanish,es-tabla,es-nodecimaldot]{babel}
 \usepackage{multirow}
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Python,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
 \usepackage[a4paper,top=1cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry} 
 %\pgfplotstableread[col sep=comma]{tables/resumen_cinco_numero_serpientes.csv}\ResumenCincoNumeros
 
@@ -34,7 +58,7 @@ Para
 \section{Solución}
 % ¿Cómo se piensa resolver este problema?
 
-\section{Resultados y conclusiones}
+
 
 TEOREMA:
 La descomposición en primos de cualquier entero positivo mayor que 1 es única,
@@ -119,7 +143,23 @@ funciona para números moderadamente grandes pero no es práctico para números 
 grandes de 100 dígitos. Puede usar técnicas similares de usar bits de entrada
 para analizar otros algoritmos que tienen un número fijo de entradas \cite{stephens2015learning}.
 
+\section{Resultados y conclusiones}
 
+\begin{lstlisting}
+def calculatePrimeFactors(n):
+    primfac = []
+    d = 2
+    while d * d <= n:
+        while (n % d) == 0:
+            primfac.append(d)
+            n //= d
+        d += 1
+    if n > 1:
+        primfac.append(n)
+    return primfac
+
+\end{lstlisting}
+    
 
 \bibliography{../references/references.bib} 
 \bibliographystyle{apalike}
