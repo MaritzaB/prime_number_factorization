@@ -8,7 +8,7 @@ import time
 max_bits = 50
 
 
-def listOfRandbits(max_bits):
+def randBits(max_bits):
     seed(68)
     randbits_list = []
     for i in range(1, max_bits):
@@ -25,7 +25,7 @@ def timer(function, number):
 
 
 def timeScorer(factFunction):
-    rand_num_list = listOfRandbits(max_bits)
+    rand_num_list = randBits(max_bits)
     time_score = []
     for i in range(len(rand_num_list)):
         time_score.append(timer(factFunction, rand_num_list[i]))
