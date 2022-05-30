@@ -1,13 +1,13 @@
 from analizer import timeScorer
 from pathlib import Path
-from prime_number_fact import sequentialPrimeFactorization, trialDivision
+from prime_number_fact import sequentialFactorization, trialDivision
 import numpy as np
 import pandas as pd
 
 filepath = Path("reports/table/out.csv")
 
 
-list1 = np.array(timeScorer(sequentialPrimeFactorization))
+list1 = np.array(timeScorer(sequentialFactorization))
 list2 = np.array(timeScorer(trialDivision))
 
 time_score_table = [list1, list2]
@@ -42,4 +42,3 @@ lambdas_table.to_csv(filepath, index=False)
 # plt.savefig("practical_complexity.png")
 #
 # Clear the figure
-

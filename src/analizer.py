@@ -1,4 +1,4 @@
-from prime_number_fact import sequentialPrimeFactorization, trialDivision
+from prime_number_fact import sequentialFactorization, trialDivision
 from random import getrandbits, seed
 import math
 import numpy as np

@@ -2,7 +2,7 @@ import time
 import math
 
 
-def sequentialPrimeFactorization(n):
+def sequentialFactorization(n):
     """Factorizacion secuencial de numeros primos"""
     primfac = []
     d = 2
