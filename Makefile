@@ -1,4 +1,4 @@
-all: \
+report: \
 	reports/factorizacion_numeros_primos.pfd
 
 .PHONY: \
@@ -29,6 +29,7 @@ clean:
 	rm --force reports/*.out
 	rm --force reports/*.pdf
 	rm --force reports/*.pytxcode
+	rm reports/table/out.csv
 	rm --recursive --force __pycache__
 	rm --recursive --force .pytest_cache
 	rm --recursive --force */__pycache__
