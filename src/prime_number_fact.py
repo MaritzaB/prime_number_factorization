@@ -3,6 +3,7 @@ import math
 
 
 def sequentialPrimeFactorization(n):
+    """Factorizacion secuencial de numeros primos"""
     primfac = []
     d = 2
     while d * d <= n:
@@ -16,6 +17,7 @@ def sequentialPrimeFactorization(n):
 
 
 def trialDivision(n):
+    """Division por tentativa"""
     primfac = []
     while n % 2 == 0:
         primfac.append(2)
