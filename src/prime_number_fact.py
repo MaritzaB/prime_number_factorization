@@ -1,6 +1,7 @@
 import time
 import random
 import threading
+import math
 
 
 def calculatePrimeFactors(n):
@@ -29,3 +30,19 @@ def main():
     for thread in threads:
         thread.join()
 
+def wheelFact(n):
+    primfac = []
+    while n % 2 ==0:
+        primfac.append(2)
+        n = n/2
+    i = 3
+    max_factor = math.sqrt(n)
+    while i <= max_factor:
+        while n % i == 0:
+            primfac.append(i)
+            n = n/i
+            max_factor = math.sqrt(n)
+        i = i+2
+    if n>1:
+        primfac.append(n)
+    return primfac
