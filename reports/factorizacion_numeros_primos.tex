@@ -173,7 +173,7 @@ anterior:
 
 \begin{itemize}
 \item Factorización secuencial de números primos (ver
-\texttt{sequentialPrimeFactorization()} de la sección \ref{sec:algoritmos})
+\texttt{sequentialFactorization()} de la sección \ref{sec:algoritmos})
     \item División por tentativa (ver
     \texttt{trialDivision()} de la sección \ref{sec:algoritmos})
 \end{itemize}
@@ -234,10 +234,28 @@ La función llamada \texttt{randBits()} (ver sección \ref{sec:complejidad}) la
 implementé con el fin de obtener una lísta de números aleatorios generados con
 base en los bits que utiliza en número. Es decir, con esta función generamos una
 lista de \textit{n} elementos, cuyo elemento más pequeño es de una cifra y los
-siguientes van aumentando hasta llegar a la cantidad deseada de cifras.
+siguientes van aumentando hasta llegar a la cantidad deseada de cifras.\\
+
+El flujo de trabajo para el análisis del problema sigue los siguientes pasos:
+
+\begin{enumerate}
+
+\item Ejecutar función \texttt{randBits()} cuyo objetivo es generar una lista de
+números aleatorios con elementos que incrementan en la cantidad de cifras del
+número, con el fin de aumentar la complejidad.
+\item Ejecutar función \texttt{timer()} cuyo objetivo es tomar el tiempo de
+ejecución de cada uno de los algoritmos de factorización implementados para este
+trabajo para un número dado.
+\item Ejecutar función \texttt{timeScorer()} que toma el tiempo de ejecución
+para los diferentes tamaños de numeros a factorizar.
+\end{enumerate}
+    
+
+Los resultados obtenidos del análisis de la complejidad práctica se muestran en
+la sección \ref{sec:resultados}
 
 
-\section{Resultados y conclusiones}
+\section{Resultados y conclusiones} \label{sec:resultados}
 
 
 
