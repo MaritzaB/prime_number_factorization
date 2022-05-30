@@ -17,6 +17,9 @@ endef
 reports/factorizacion_numeros_primos.pfd: reports/factorizacion_numeros_primos.tex
 	$(renderLatex)
 
+analysis:
+	python3 src/analizer.py
+
 clean:
 	rm --force --recursive reports/pythontex*
 	rm --force reports/*.aux
