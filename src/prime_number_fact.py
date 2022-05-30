@@ -1,10 +1,8 @@
 import time
-import random
-import threading
 import math
 
 
-def calculatePrimeFactors(n):
+def sequentialPrimeFactorization(n):
     primfac = []
     d = 2
     while d * d <= n:
@@ -17,23 +15,7 @@ def calculatePrimeFactors(n):
     return primfac
 
 
-def executeProcess():
-    for i in range(1000):
-        rand = random.randint(20000, 100000000)
-        print(calculatePrimeFactors(rand))
-
-
-def main():
-    threads = []
-    for i in range(10):
-        thread = threading.Thread(target=executeProcess)
-        threads.append(thread)
-        thread.start()
-    for thread in threads:
-        thread.join()
-
-
-def wheelFact(n):
+def trialDivision(n):
     primfac = []
     while n % 2 == 0:
         primfac.append(2)

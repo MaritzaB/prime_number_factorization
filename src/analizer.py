@@ -1,9 +1,9 @@
-from prime_number_fact import calculatePrimeFactors, wheelFact, main
-import time
+from prime_number_fact import sequentialPrimeFactorization, trialDivision
 from random import getrandbits, seed
-import matplotlib.pyplot as plt
-import numpy as np
 import math
+import numpy as np
+import pandas as pd
+import time
 
 max_bits = 50
 
@@ -25,24 +25,8 @@ def timer(function, number):
 
 
 def timeScorer(factFunction):
-    rand_num_list = listOfRandbits()
-    timer_list_Prime_Factors = []
+    rand_num_list = listOfRandbits(max_bits)
+    time_score = []
     for i in range(len(rand_num_list)):
-        timer_list_Prime_Factors.append(timer(factFunction, rand_num_list[i]))
-    return timer_list_Prime_Factors
-
-
-
-
-### Plot practical complexity
-# plt.xlabel('Bits')
-# plt.ylabel('Tiempo (segundos)')
-# plt.title('Complejidad práctica')
-# bits = [x for x in range(1,max_bits)]
-#
-# plt.plot(bits,timer_list_Prime_Factors)
-# plt.plot(bits,timer_list_Prime_wheelFact)
-# plt.savefig("practical_complexity.png")
-#
-### Clear the figure
-##plt.clf()
+        time_score.append(timer(factFunction, rand_num_list[i]))
+    return time_score
