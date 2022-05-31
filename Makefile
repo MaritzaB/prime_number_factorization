@@ -30,6 +30,7 @@ clean:
 	rm --force reports/*.log
 	rm --force reports/*.out
 	rm --force reports/*.pdf
+	rm --force reports/*.toc
 	rm --force reports/*.pytxcode
 	rm --recursive --force __pycache__
 	rm --recursive --force .pytest_cache

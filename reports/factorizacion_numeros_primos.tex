@@ -21,6 +21,7 @@
 \author{Ana Maritza Bello Yañez}
 \maketitle
 
+\tableofcontents
 
 \section{Descripción del problema}
 
@@ -257,17 +258,57 @@ la sección \ref{sec:resultados}
 
 \section{Resultados y conclusiones} \label{sec:resultados}
 
+Con el fin de medir la complejidad de cada uno de los algoritmos, evaluamos cada
+uno con una lista de números enteros aleatorios, cuyo tamaño de almacenamiento
+va desde uno hasta 60 bits.
+
+Medimos el tiempo que tardaba cada uno de los algoritmos en encontrar los
+factores primos del número evaluado.
+
+En la figura podemos observar la complejidad práctica del algoritmo de
+factorización secuencial y del algoritmo de división tentativa.
+
 \begin{figure}[H]
         \includegraphics[scale=1]{figures/practical_complexity.png}
-    \caption{}
+\caption{Complejidad práctica de los algorimoes de feactorizacioń secuencial y
+de división tentativa. En el eje x está representado el tamaño del número en
+bits que fue evaluado por el algoritmo. En el eje y está representado el tiempo
+que tardó el algoritmo en encontrar los factores del número evaluado.
+Los ejes se encuentran en escala logarítmica para poder apreciar con mayor
+detalle la proporción por la que un algoritmo es más rápido que otro.
+    } \label{complejidad}
 \end{figure}
 
+\subsection{Conclusiones}
 
+De la figura \ref{complejidad} podemos concluir que:
+
+\begin{enumerate}
+    \item Los dos algoritmos tienen la misma tendencia en la complejidad.
+\item El algoritmo de división tentativa tiende a ser más rápido que el de
+factorización secuencial conforme el tamaño del número aumenta.
+\item La evaluación con los números cuyo tamaño van de 1 a 10 bits en algunos
+casos, el algoritmo de factorización resulta ser más rápido que el de división
+tentativa.
+\item Se comprueba que la complejidad del problema aumenta conforme aumenta el
+tamaño del número.
+\item En la práctica, fue muy dificil evaluar los algoritmos con valores mayores
+a los 55 bites. Esto puede ser debido a la arquitectura de la computadora
+utilizada para la evaluación.
+\item Como trabajo a futuro, sería interesante poder comparar otros algoritmos de
+factorización de números enteros. Ya que aunque pudimos observar que en efecto
+un algoritmo es más rápido que el otro, el principio en ambos es el mismo.
+
+\end{enumerate}
+
+\pagebreak
 \bibliography{../references/references.bib} 
 \bibliographystyle{apalike}
 
 \pagebreak
 \section{Apéndice}
+
+El trabajo presentado en este reporte también se puede consultar y descargar en 
 
 \subsection{Algoritmos de factorización implementados} \label{sec:algoritmos}
 
@@ -275,12 +316,12 @@ la sección \ref{sec:resultados}
 
 \pagebreak
 
-\section{Implementación del código de análisis de complejidad práctica} \label{sec:complejidad}
+\subsection{Implementación del código de análisis de complejidad práctica} \label{sec:complejidad}
 
 \lstinputlisting[language=Python]{../src/analizer.py}
 
 \pagebreak
-\section{Código para graficar la complejidad práctica} \label{sec:grafica}
+\subsection{Código para graficar la complejidad práctica} \label{sec:grafica}
 
 \lstinputlisting[language=Python]{../src/plotter.py}
 
