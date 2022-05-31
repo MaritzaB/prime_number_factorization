@@ -16,8 +16,8 @@ def plotter(max_bits, comparative_table):
     plt.xscale("log")
     plt.yscale("log")
     bits = [x for x in range(1, max_bits + 1)]
-    plt.plot(bits, comparative_table[0], label = "Factorizacion secuencial")
-    plt.plot(bits, comparative_table[1], label = "Division tentativa")
+    plt.plot(bits, comparative_table[0], label="Factorizacion secuencial")
+    plt.plot(bits, comparative_table[1], label="Division tentativa")
     plt.legend()
     plt.savefig("reports/figures/practical_complexity.png")
 

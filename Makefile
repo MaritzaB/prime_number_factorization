@@ -31,11 +31,11 @@ clean:
 	rm --force reports/*.out
 	rm --force reports/*.pdf
 	rm --force reports/*.pytxcode
-	rm --force reports/table/*.csv
-	rm --force reports/figures/*.png
 	rm --recursive --force __pycache__
 	rm --recursive --force .pytest_cache
 	rm --recursive --force */__pycache__
+	rm --recursive --force reports/figures/
+	rm --recursive --force reports/tables/
 
 format:
 	black --line-length 100 src/*.py
