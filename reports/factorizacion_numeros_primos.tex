@@ -279,6 +279,17 @@ detalle la proporción por la que un algoritmo es más rápido que otro.
     } \label{complejidad}
 \end{figure}
 
+\begin{figure}[H]
+    \includegraphics[scale=1]{figures/ratio.png}
+\caption{Razón de proporción del algoritmo de división tentativa con respecto a
+la factorización secuencial. En esta gráfica podemos observar la proporción con
+la que el algoritmo de división tentativa fué más rápida que la factorización
+secuencial. Los valores que se encuentra por debajo de la línea punteada
+corresponden a los casos en el que el algoritmo fue más lento que en el
+factorización secuencial.
+} \label{ratio}
+\end{figure}
+
 \subsection{Conclusiones}
 
 De la figura \ref{complejidad} podemos concluir que:
@@ -301,6 +312,15 @@ un algoritmo es más rápido que el otro, el principio en ambos es el mismo.
 
 \end{enumerate}
 
+De la figura \ref{ratio} podemos concluir que:
+\begin{enumerate}
+\item Solo en los casos donde el tamaño del número era menor o igual a 11 bits,
+hubo ocasiones en los que el algoritmo de factorización secuencial fue más
+rápido.
+\item Conforme el tamaño del número aumenta, el algoritmo de división tentativa
+es más rápido hasta 2.5 veces más que el de factorización secuencial.
+\end{enumerate}
+
 \pagebreak
 \bibliography{../references/references.bib} 
 \bibliographystyle{apalike}
@@ -309,7 +329,7 @@ un algoritmo es más rápido que el otro, el principio en ambos es el mismo.
 \section{Apéndice}
 
 El trabajo presentado en este reporte también se puede consultar y clonar en
-este el repositorio de GitHub de \url{https://github.com/MaritzaB/prime_number_factorization/tree/feature/init_project}
+este el repositorio de GitHub de \url{https://github.com/MaritzaB/prime_number_factorization/tree/develop}
 
 \subsection{Algoritmos de factorización implementados} \label{sec:algoritmos}
 
