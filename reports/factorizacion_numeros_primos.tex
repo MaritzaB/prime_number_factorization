@@ -1,0 +1,330 @@
+\documentclass{article}
+\usepackage[a4paper,top=1cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}  
+\usepackage[spanish,es-tabla,es-nodecimaldot]{babel}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{color} 
+\usepackage{csvsimple}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{listings} 
+\usepackage{multirow}
+\usepackage{pgfplotstable}
+\usepackage{setspace} 
+%\usepackage{pythontex}
+
+\input{specifications}
+
+
+\begin{document}
+\title{Factorización de números primos}
+\author{Ana Maritza Bello Yañez}
+\maketitle
+
+\tableofcontents
+
+\section{Descripción del problema}
+
+La descomposición en factores primos es un concepto de la teoría de números que
+se refiere a la descomposición de un número en el producto de dos números
+primos. La factorización prima es un subconjunto de la factorización de enteros,
+en la que un número compuesto se factoriza en el producto de dos enteros
+cualesquiera. Parte del teorema que estipula que la descomposición en primos de
+cualquier entero positivo mayor que 1, es única, excepto por el orden en que se
+escriben los factores primos \cite{lewinter2015elementary}.
+
+Los números primos juegan papeles importantes en algunas aplicaciones donde sus
+propiedades especiales hacen que ciertas operaciones sean más fáciles o más
+difíciles. Por ejemplo, algunos tipos de criptografía utilizan el producto de
+dos grandes números primos para brindar seguridad. El hecho de que sea difícil
+factorizar un número que es el producto de dos números primos grandes es lo que
+hace que el algoritmo sea seguro \cite{stephens2019essential}.
+
+Es un desafío encontrar los factores de los semiprimos (números que resultan del
+producto de dos números primos) porque tienen solo un par de factores, y la
+complejidad de encontrar los factores aumenta a medida que el tamaño del número
+primo se usa en el producto aumenta. No existe un algoritmo de factorización
+eficiente conocido para encontrar factores cuando los números son de cierto
+tamaño. 
+
+RSA (por sus siglas en inglés Rivest-Shamir-Adleman) es un criptosistema de
+clave pública que se usa ampliamente para la transmisión segura de datos que usa
+factorización prima, suponiendo que es realmente difícil encontrar la clave
+privada del producto expuesto de números primos. Esta supuesta dificultad es la
+razón detrás del uso de la factorización prima en criptografía
+\cite{raj2019foundations}.
+
+
+\section{Justificación del problema}
+% ¿Por qué es importante resolver este problema?\
+
+Los números primos en criptografía son vitales para la seguridad de nuestros
+esquemas de cifrado. La factorización prima, también conocida como factorización
+de enteros, es un problema matemático que se utiliza para proteger los esquemas
+de cifrado de clave pública. Esto se logra mediante el uso de números semiprimos
+extremadamente grandes que son el resultado de la multiplicación de dos números
+primos \cite{sedgewick2015introduction}
+
+RSA es una de las implementaciones iniciales de criptografía público-privada.
+Utiliza el principio de factorización prima para generar un par de claves
+pública-privada. El cifrado se realiza con la clave pública, que se distribuye a
+todo el mundo, y el descifrado se realiza con la clave privada guardada en
+secreto.
+
+La idea de un criptosistema de clave pública-privada asimétrica se atribuye a
+Whitfield Diffie y Martin Hellman, quienes publicaron este concepto en 1976.
+
+El par de claves pública y privada se calculan con la ayuda de dos grandes
+números primos. La clave pública se publica para el usuario y la clave privada
+se mantiene en secreto. Los números primos también se mantienen en secreto.
+Siempre que los números primos utilizados sean grandes, no es factible calcular
+la clave privada a partir de la clave pública. Todo el criptosistema RSA se basa
+en el problema de la teoría de números de la factorización de enteros, lo que
+garantiza que la dificultad de la factorización prima sea proporcional al tamaño
+de los números primos utilizados \cite{raj2019foundations}.
+
+
+\section{Estado del arte}
+% Qué se ha hecho hasta ahora?
+
+Hasta la fecha no se ha publicado un algoritmo que pueda factorizar todos los
+enteros en tiempo polinomial; es decir no hay algún algoritmo conocido que pueda
+factorizar un número n gránde en tiempo $$ O(n^k)$$ para cualquier constante
+\textit{k}.
+
+Los algoritmos que resuelven este problema se dividen en dos dependiendo del
+tamaño del número de entrada y las características de este.
+
+Los algoritmos de categoría 1 o propósito específico son aquellos cuyo tiempo de
+ejecución depende del tamaño del factor primo más pequeño. Por ejemplo:
+
+\begin{itemize}
+    \item División por tentativa
+    \item Algoritmo Rho de Pollar
+    \item Método de factorización de Fermat
+\end{itemize}
+
+Los algoritmos de categoría 2 o propósito general son aquellos cuyo tiempo de
+ejecución depende solamente del tamaño del entero a ser factorizado. Por ejemplo:
+
+\begin{itemize}
+    \item Algoritmo de Dixon
+    \item Factorización con fracciones contínuas
+    \item Criba cuadrática
+    \item Criba racional
+\end{itemize}
+
+\subsection{Dificultad y complejidad}
+
+
+La forma más básica de factorizar un número, $N$, es intentar dividirlo por
+todos los números inferiores a este hasta que encontremos un factor que divide
+$N$. Luego intentamos dividir $N$ con el siguiente número y pronto terminaremos
+con una lista de factores de $N$.
+
+Para saber la complejidad de este algoritmo, recordemos que expresamos
+complejidades en función de la longitud de la entrada. La longitud de bits del
+número $N$ es $n= log2 N$. Por la definición básica de logaritmo, esto
+significa que $N = 2^n$. Debido a que todos los números inferiores a $N/2$ son
+suposiciones razonables para posibles factores de $N$, hay aproximadamente $$N/2
+= 2^n/2$$ valores para probar. La complejidad de nuestro algoritmo de
+factorización tentativo es, por lo tanto, $$ O(2n) $$ ignorando el coeficiente
+1/2 en la notación $ O(2^n)$. \\
+
+Por supuesto, muchos números son fáciles de tener en cuenta al encontrar primero
+factores pequeños (2, 3, 5, etc.) y luego factorizando iterativamente cualquier
+otro factor no primo. Pero aquí estamos interesados en el número de la forma $n
+= p x q$, donde $p$ y $q$ son valores muy grandes, como se encuentran en la
+criptografía.
+
+Para la mayoría de los algoritmos, considera el tiempo de ejecución como una
+función de la cantidad de entradas. Sin embargo, este algoritmo solo tiene una
+entrada: el número que está factorizando. El algoritmo tarda más en factorizar
+números grandes, por lo que no tiene sentido pensar en la cantidad de tiempo que
+tarda el algoritmo en función del valor 1. 
+
+Para algoritmos como este, el tiempo depende del tamaño de la entrada y no en el
+número de entradas. Así es como los analiza: observando el tamaño de la entrada.
+Podemos pensar en esto como mirar la cantidad de bits en el valor que va a
+factorizar.
+
+El peor caso para este algoritmo ocurre cuando el número de entrada es primo. En
+ese caso, el programa examina posibles factores impares hasta llegar a la raíz
+cuadrada del número. Esto significa que si el número de pasos que realiza para
+llegar a ese punto es $ O(2^n)$, el tiempo de ejecución del algoritmo es
+exponencial en el número de bits de entrada.
+
+Su tiempo de ejecución depende de potencias de $\sqrt(n)$, por lo que no crece
+tan rápido como lo haría si dependiera de potencias de 2 o algún número mayor.
+Pero una vez que la función crece, realmente despega, como lo hacen todas las
+funciones exponenciales. Es por eso que este algoritmo funciona para números
+moderadamente grandes pero no es práctico para números muy grandes de 100
+dígitos. Puede usar técnicas similares de usar bits de entrada para analizar
+otros algoritmos que tienen un número fijo de entradas
+\cite{stephens2015learning}.
+
+
+\section{Solución}
+% ¿Cómo se piensa resolver este problema?
+
+\subsection{Algoritmos implementados}
+
+Para este reporte implementé dos de los algorítmos mencionados en la sección
+anterior:
+
+\begin{itemize}
+\item Factorización secuencial de números primos (ver
+\texttt{sequentialFactorization()} de la sección \ref{sec:algoritmos})
+    \item División por tentativa (ver
+    \texttt{trialDivision()} de la sección \ref{sec:algoritmos})
+\end{itemize}
+
+\subsubsection{Algoritmo de factorización secuencial}
+
+Este algoritmo consiste en dividir el número entre todos los números entre 2 y
+n-1 menores a él. Cáda vez que un posible factor divide al número de manera
+uniforme, se guarda el factor y se divide el número. Esto continua hasta
+intentar la mayor cantidad de factores posibles \cite{stephens2019essential}.\\
+
+Por ejemplo para encontrar los factores primos de 204, intentaría dividir 204
+por 2, 3, 4, 5, y así sucesivamente, hasta llegar a 126. En este caso nos
+detendríamos en el factor 3, como en este ejemplo:
+
+\begin{center}
+    \begin{tabular}{ c c c }
+     Factores & Número \\ 
+              & 204    \\
+     2x2      & 102    \\
+     2x2x3    & 51
+    \end{tabular}
+    \end{center}
+
+\subsubsection{Algoritmo de división por tentativa}
+
+Para mejorar el algoritmo de factorización secuencial, podemos hacer las
+siguientes observaciones:
+
+\begin{itemize}
+    \item No necesitamos probar si el número es divisible por cualquier número par que
+    no sea 2 porque, si es divisible por cualquier número par, también es divisible
+    por 2. Esto significa que sólo necesitamos comprobar la divisibilidad por 2 y luego
+    por números impares en lugar de por todos los factores posibles. Si lo hacemos,
+    reducimos el tiempo de ejecución aproximadamente a la mitad.
+
+    \item Solo necesita verificar los factores hasta la raíz cuadrada del número. Si
+    $ n= p*q $, entonces \textit{p}  o \textit{q} deben ser menores o iguales
+    que las $\sqrt(n)$. (Si \textit{p}  y \textit{q} son mayores que $\sqrt(n)$,
+    entonces su producto es mayor que \textit{n}). Si marcamos los factores posibles
+    hasta $\sqrt(n)$, encontraremos el factor más pequeño, y cuando dividamos
+    \textit{n} por ese factor, encontraremos el otro. Esto reduce el tiempo de
+    ejecución de $O(\sqrt(n))$.
+
+    \item Cada vez que dividimos el número por un factor, podemos actualizar el
+    límite superior de los posibles factores que necesitamos verificar, lo que nos
+    lleva a un algoritmo mejorado de la factorización secuencial (ver
+    \texttt{trialDivision()} de la sección \ref{sec:algoritmos}).
+
+\end{itemize}
+
+\subsection{Complejidad práctica del problema}
+
+Con el fin de realizar el análisis de complejidad práctica, implementé la
+función \texttt{timer()} y \texttt{timeScorer()} (ver en \ref{sec:complejidad}).
+
+La función llamada \texttt{randBits()} (ver sección \ref{sec:complejidad}) la
+implementé con el fin de obtener una lísta de números aleatorios generados con
+base en los bits que utiliza en número. Es decir, con esta función generamos una
+lista de \textit{n} elementos, cuyo elemento más pequeño es de una cifra y los
+siguientes van aumentando hasta llegar a la cantidad deseada de cifras.\\
+
+El flujo de trabajo para el análisis del problema sigue los siguientes pasos:
+
+\begin{enumerate}
+
+\item Ejecutar función \texttt{randBits()} cuyo objetivo es generar una lista de
+números aleatorios con elementos que incrementan en la cantidad de cifras del
+número, con el fin de aumentar la complejidad.
+\item Ejecutar función \texttt{timer()} cuyo objetivo es tomar el tiempo de
+ejecución de cada uno de los algoritmos de factorización implementados para este
+trabajo para un número dado.
+\item Ejecutar función \texttt{timeScorer()} que toma el tiempo de ejecución
+para los diferentes tamaños de numeros a factorizar.
+\end{enumerate}
+    
+
+Los resultados obtenidos del análisis de la complejidad práctica se muestran en
+la sección \ref{sec:resultados}
+
+
+\section{Resultados y conclusiones} \label{sec:resultados}
+
+Con el fin de medir la complejidad de cada uno de los algoritmos, evaluamos cada
+uno con una lista de números enteros aleatorios, cuyo tamaño de almacenamiento
+va desde uno hasta 60 bits.
+
+Medimos el tiempo que tardaba cada uno de los algoritmos en encontrar los
+factores primos del número evaluado.
+
+En la figura podemos observar la complejidad práctica del algoritmo de
+factorización secuencial y del algoritmo de división tentativa.
+
+\begin{figure}[H]
+        \includegraphics[scale=1]{figures/practical_complexity.png}
+\caption{Complejidad práctica de los algorimoes de feactorizacioń secuencial y
+de división tentativa. En el eje x está representado el tamaño del número en
+bits que fue evaluado por el algoritmo. En el eje y está representado el tiempo
+que tardó el algoritmo en encontrar los factores del número evaluado.
+Los ejes se encuentran en escala logarítmica para poder apreciar con mayor
+detalle la proporción por la que un algoritmo es más rápido que otro.
+    } \label{complejidad}
+\end{figure}
+
+\subsection{Conclusiones}
+
+De la figura \ref{complejidad} podemos concluir que:
+
+\begin{enumerate}
+    \item Los dos algoritmos tienen la misma tendencia en la complejidad.
+\item El algoritmo de división tentativa tiende a ser más rápido que el de
+factorización secuencial conforme el tamaño del número aumenta.
+\item La evaluación con los números cuyo tamaño van de 1 a 10 bits en algunos
+casos, el algoritmo de factorización resulta ser más rápido que el de división
+tentativa.
+\item Se comprueba que la complejidad del problema aumenta conforme aumenta el
+tamaño del número.
+\item En la práctica, fue muy dificil evaluar los algoritmos con valores mayores
+a los 55 bites. Esto puede ser debido a la arquitectura de la computadora
+utilizada para la evaluación.
+\item Como trabajo a futuro, sería interesante poder comparar otros algoritmos de
+factorización de números enteros. Ya que aunque pudimos observar que en efecto
+un algoritmo es más rápido que el otro, el principio en ambos es el mismo.
+
+\end{enumerate}
+
+\pagebreak
+\bibliography{../references/references.bib} 
+\bibliographystyle{apalike}
+
+\pagebreak
+\section{Apéndice}
+
+El trabajo presentado en este reporte también se puede consultar y clonar en
+este el repositorio de GitHub de \url{https://github.com/MaritzaB/prime_number_factorization/tree/feature/init_project}
+
+\subsection{Algoritmos de factorización implementados} \label{sec:algoritmos}
+
+\lstinputlisting[language=Python]{../src/prime_number_fact.py}
+
+\pagebreak
+
+\subsection{Implementación del código de análisis de complejidad práctica} \label{sec:complejidad}
+
+\lstinputlisting[language=Python]{../src/analizer.py}
+
+\pagebreak
+\subsection{Código para graficar la complejidad práctica} \label{sec:grafica}
+
+\lstinputlisting[language=Python]{../src/plotter.py}
+
+
+\end{document}
