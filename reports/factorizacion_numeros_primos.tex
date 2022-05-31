@@ -29,7 +29,7 @@ se refiere a la descomposición de un número en el producto de dos números
 primos. La factorización prima es un subconjunto de la factorización de enteros,
 en la que un número compuesto se factoriza en el producto de dos enteros
 cualesquiera. Parte del teorema que estipula que la descomposición en primos de
-cualquier entero positivo mayor que 1 es única, excepto por el orden en que se
+cualquier entero positivo mayor que 1, es única, excepto por el orden en que se
 escriben los factores primos \cite{lewinter2015elementary}.
 
 Los números primos juegan papeles importantes en algunas aplicaciones donde sus
@@ -104,7 +104,7 @@ ejecución depende del tamaño del factor primo más pequeño. Por ejemplo:
 \end{itemize}
 
 Los algoritmos de categoría 2 o propósito general son aquellos cuyo tiempo de
-ejecución depende solamente del tamaño del entero a ser factorizado Por ejemplo:
+ejecución depende solamente del tamaño del entero a ser factorizado. Por ejemplo:
 
 \begin{itemize}
     \item Algoritmo de Dixon
@@ -206,7 +206,7 @@ siguientes observaciones:
 \begin{itemize}
     \item No necesitamos probar si el número es divisible por cualquier número par que
     no sea 2 porque, si es divisible por cualquier número par, también es divisible
-    por 2. Esto significa que solo necesitamos comprobar la divisibilidad por 2 y luego
+    por 2. Esto significa que sólo necesitamos comprobar la divisibilidad por 2 y luego
     por números impares en lugar de por todos los factores posibles. Si lo hacemos,
     reducimos el tiempo de ejecución aproximadamente a la mitad.
 
@@ -257,6 +257,11 @@ la sección \ref{sec:resultados}
 
 \section{Resultados y conclusiones} \label{sec:resultados}
 
+\begin{figure}[H]
+    \hspace{-2cm}
+        \includegraphics[scale=0.7]{figures/practical_complexity.png}
+    \caption{}
+\end{figure}
 
 
 \bibliography{../references/references.bib} 
@@ -275,7 +280,10 @@ la sección \ref{sec:resultados}
 
 \lstinputlisting[language=Python]{../src/analizer.py}
 
-%\lstinputlisting[language=Python]{../src/plotter.py}
+\pagebreak
+\section{Código para graficar la complejidad práctica} \label{sec:grafica}
+
+\lstinputlisting[language=Python]{../src/plotter.py}
 
 
 \end{document}
