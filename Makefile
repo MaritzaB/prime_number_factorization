@@ -14,11 +14,13 @@ define renderLatex
 	cd $(<D) && pdflatex $(<F)
 endef
 
-reports/factorizacion_numeros_primos.pfd: reports/factorizacion_numeros_primos.tex
+reports/factorizacion_numeros_primos.pfd: reports/factorizacion_numeros_primos.tex figures
 	$(renderLatex)
 
-analysis:
-	python3 src/analizer.py
+figures:
+	mkdir --parents reports/tables
+	mkdir --parents reports/figures
+	python3 src/plotter.py
 
 clean:
 	rm --force --recursive reports/pythontex*
@@ -29,7 +31,8 @@ clean:
 	rm --force reports/*.out
 	rm --force reports/*.pdf
 	rm --force reports/*.pytxcode
-	rm reports/table/out.csv
+	rm --force reports/table/*.csv
+	rm --force reports/figures/*.png
 	rm --recursive --force __pycache__
 	rm --recursive --force .pytest_cache
 	rm --recursive --force */__pycache__
