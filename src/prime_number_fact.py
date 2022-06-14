@@ -1,35 +1,34 @@
-import time
 import math
 
 
-def sequentialFactorization(n):
+def sequentialFactorization(number):
     """Factorizacion secuencial de numeros primos"""
     primfac = []
-    d = 2
-    while d * d <= n:
-        while (n % d) == 0:
-            primfac.append(d)
-            n //= d
-        d += 1
-    if n > 1:
-        primfac.append(n)
+    div = 2
+    while div * div <= number:
+        while (number % div) == 0:
+            primfac.append(div)
+            number //= div
+        div += 1
+    if number > 1:
+        primfac.append(number)
     return primfac
 
 
-def trialDivision(n):
+def trialDivision(number):
     """Division por tentativa"""
     primfac = []
-    while n % 2 == 0:
+    while number % 2 == 0:
         primfac.append(2)
-        n = n / 2
+        number = number / 2
     i = 3
-    max_factor = math.sqrt(n)
+    max_factor = math.sqrt(number)
     while i <= max_factor:
-        while n % i == 0:
+        while number % i == 0:
             primfac.append(i)
-            n = n / i
-            max_factor = math.sqrt(n)
+            number = number / i
+            max_factor = math.sqrt(number)
         i = i + 2
-    if n > 1:
-        primfac.append(n)
+    if number > 1:
+        primfac.append(number)
     return primfac

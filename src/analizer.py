@@ -1,12 +1,5 @@
-from prime_number_fact import sequentialFactorization, trialDivision
 from random import getrandbits, seed
-import math
-import numpy as np
-import pandas as pd
 import time
-
-
-max_bits = 50
 
 
 def randBits(max_bits):
@@ -29,11 +22,14 @@ def timer(function, number):
     return total_time
 
 
-def timeScorer(factFunction):
+MAX_BITS = 50
+
+
+def timeScorer(factorization_function):
     """Toma el tiempo de ejecucion de un
     algoritmo para una lista de numeros dados"""
-    rand_num_list = randBits(max_bits)
+    rand_num_list = randBits(MAX_BITS)
     time_score = []
     for i in range(len(rand_num_list)):
-        time_score.append(timer(factFunction, rand_num_list[i]))
+        time_score.append(timer(factorization_function, rand_num_list[i]))
     return time_score

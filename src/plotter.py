@@ -1,11 +1,7 @@
-from analizer import timeScorer, max_bits
-from pathlib import Path
-from prime_number_fact import sequentialFactorization, trialDivision
-import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
-
-max_bits = 50
+import numpy as np
+from analizer import timeScorer
+from prime_number_fact import sequentialFactorization as sf, trialDivision as td
 
 
 def complexityPlotter(max_bits, comparative_table, filepath):
@@ -15,7 +11,7 @@ def complexityPlotter(max_bits, comparative_table, filepath):
     plt.title("Complejidad practica")
     plt.xscale("log")
     plt.yscale("log")
-    bits = [x for x in range(1, max_bits + 1)]
+    bits = list(range(1, max_bits + 1))
     plt.plot(bits, comparative_table[0], label="Factorizacion secuencial")
     plt.plot(bits, comparative_table[1], label="Division tentativa")
     plt.legend()
@@ -30,7 +26,7 @@ def ratioPlotter(max_bits, comparative_table, filepath):
     plt.ylabel("Razon")
     plt.title("Razon de proporcion")
     plt.xscale("log")
-    bits = [x for x in range(1, max_bits + 1)]
+    bits = list(range(1, max_bits + 1))
     ratio = np.array(comparative_table[0] / comparative_table[1])
     plt.plot(bits, ratio)
     plt.axhline(y=1, color="r", linestyle="--")
@@ -41,7 +37,7 @@ def ratioPlotter(max_bits, comparative_table, filepath):
 
 def pickWinner(seq_fact_list, trial_div_list):
     winner_table = []
-    for i in range(len(seq_fact_list)):
+    for i in range(1, len(seq_fact_list)):
         if seq_fact_list[i] < trial_div_list[i]:
             winner_table.append("Factorizacion secuencial")
         else:
@@ -50,23 +46,24 @@ def pickWinner(seq_fact_list, trial_div_list):
     return winner_table
 
 
-seq_fact_list = np.array(timeScorer(sequentialFactorization))
-trial_div_list = np.array(timeScorer(trialDivision))
+sequential_fact_list = np.array(timeScorer(sf))
+trial_division_list = np.array(timeScorer(td))
 
 # Pick winner
-winner = np.array(pickWinner(seq_fact_list, trial_div_list))
+winner = np.array(pickWinner(sequential_fact_list, trial_division_list))
 
 # Fill table
 time_score_table = []
-time_score_table.append(seq_fact_list)
-time_score_table.append(trial_div_list)
+time_score_table.append(sequential_fact_list)
+time_score_table.append(trial_division_list)
 time_score_table = np.array(time_score_table)
 
-complexity_fig_path = "reports/figures/practical_complexity.png"
-ratio_fig_path = "reports/figures/ratio.png"
+COMPLEXITY_FIG_PATH = "reports/figures/practical_complexity.png"
+RATIO_FIG_PATH = "reports/figures/ratio.png"
+MAX_BITS = 50
 
 # Plot complexity
-complexityPlotter(max_bits, time_score_table, complexity_fig_path)
+complexityPlotter(MAX_BITS, time_score_table, COMPLEXITY_FIG_PATH)
 
 # Plot ratio
-ratioPlotter(max_bits, time_score_table, ratio_fig_path)
+ratioPlotter(MAX_BITS, time_score_table, RATIO_FIG_PATH)
