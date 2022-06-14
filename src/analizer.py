@@ -30,6 +30,6 @@ def timeScorer(factorization_function):
     algoritmo para una lista de numeros dados"""
     rand_num_list = randBits(MAX_BITS)
     time_score = []
-    for i in range(len(rand_num_list)):
+    for i in range(1, len(rand_num_list)):
         time_score.append(timer(factorization_function, rand_num_list[i]))
     return time_score
