@@ -14,6 +14,15 @@ define renderLatex
 	cd $(<D) && pdflatex $(<F)
 endef
 
+define lint
+	pylint \
+        --disable=missing-class-docstring \
+        --disable=missing-function-docstring \
+        --disable=missing-module-docstring \
+		--function-naming-style=camelCase \
+        ${1}
+endef
+
 reports/factorizacion_numeros_primos.pfd: reports/factorizacion_numeros_primos.tex figures
 	$(renderLatex)
 
@@ -41,6 +50,9 @@ clean:
 format:
 	black --line-length 100 src/*.py
 
+linter:
+	$(call lint, src)
+	$(call lint, tests)
 
 tests:
 	pytest --verbose tests/

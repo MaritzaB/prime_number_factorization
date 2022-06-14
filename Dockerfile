@@ -22,4 +22,4 @@ RUN apt-get update && \
 
 RUN pip install --upgrade pytest
 RUN pip install black
-RUN pip install -U matplotlib
+RUN pip install -U matplotlib pandas numpy
